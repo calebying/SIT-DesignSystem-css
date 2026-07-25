@@ -1,14 +1,13 @@
 {
-  "name": "@govtechsg/sgds",
-  "version": "2.3.6",
-  "description": "Design System unites Singapore Government digital services around a common visual language and user experience",
+  "name": "@sit-canvas/canvas-css",
+  "version": "1.0.0",
+  "description": "SIT Canvas Design System — Bootstrap-based CSS framework, forked from GovTechSG/sgds v2.3.6",
   "repository": {
     "type": "git",
-    "url": "https://github.com/govtechsg/sgds.git"
+    "url": "https://github.com/calebying/SIT-DesignSystem-css.git"
   },
   "license": "MIT",
-  "author": "Tey Liang Tai",
-  "main": "css/sgds.css",
+  "main": "css/sit-canvas.css",
   "files": [
     "sass",
     "css"
@@ -30,6 +29,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "bootstrap": "~5.2.0"
+    "bootstrap": "5.2.3"
   }
 }

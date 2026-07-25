@@ -1,0 +1,5 @@
+node_modules/
+css/
+/sit-canvas.js
+/sit-canvas.js.map
+*.log

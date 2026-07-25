@@ -1,11 +1,11 @@
-# Singapore Government Design System
+# SIT Canvas Design System — CSS Framework
 
-[![npm](https://img.shields.io/npm/v/@govtechsg/sgds.svg)](https://www.npmjs.com/package/@govtechsg/sgds)
+[![npm](https://img.shields.io/npm/v/@sit-canvas/canvas-css.svg)](https://www.npmjs.com/package/@sit-canvas/canvas-css)
 
-The [Singapore Government Design System](https://www.designsystem.tech.gov.sg) was developed to empower teams in creating fast, accessible and mobile-friendly digital services.
-
-Visit our [React storybook](https://react.designsystem.tech.gov.sg)
-Visit our [Web Component storybook](https://webcomponent.designsystem.tech.gov.sg)
+The SIT Canvas Design System CSS framework provides the Bootstrap-based visual foundation used by
+Canvas React components. Forked and rebranded from GovTech's Singapore Government Design System
+(`@govtechsg/sgds` v2.3.6), independent of GovTech's registry — no dependency on their upstream
+package, so it will not auto-update from their releases.
 
 ***
 
@@ -18,7 +18,7 @@ Visit our [Web Component storybook](https://webcomponent.designsystem.tech.gov.s
     ...
     <link
         rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds/css/sgds.css"
+        href="https://cdn.jsdelivr.net/npm/@sit-canvas/canvas-css/css/sit-canvas.css"
     />
     ...
 </head>
@@ -26,38 +26,36 @@ Visit our [Web Component storybook](https://webcomponent.designsystem.tech.gov.s
 
 ### Vanilla JavaScript
 
-SGDS components makes use of [bootstrap v5.1.3 js library](https://getbootstrap.com/docs/5.1/getting-started/javascript/) as an external dependency. If you only need the visual parts of SGDS, or if you are [using frontend frameworks like React](https://react.designsystem.tech.gov.sg), you do not need to import this.
+Canvas CSS components make use of the [bootstrap v5.2 js library](https://getbootstrap.com/docs/5.2/getting-started/javascript/) as an external dependency. If you only need the visual parts, or if you are using a frontend framework like React, you do not need to import this.
 
-> `@govtechsg/sgds` uses `bootstrap-icons` for certain components like Form but it is not ship with it. Install `bootstrap-icons` or use CDN if you need it. Please refer to [bootstrap-icons](bootstrap-icons) for usage instructions.
+> `@sit-canvas/canvas-css` uses `bootstrap-icons` for certain components like Form but does not ship with it. Install `bootstrap-icons` or use a CDN if you need it. Please refer to [bootstrap-icons](bootstrap-icons) for usage instructions.
 
 ```html
 <head>
   ...
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govtechsg/sgds/css/sgds.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sit-canvas/canvas-css/css/sit-canvas.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   ...
 </head>
 
 <body>
   ...
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
 </body>
 ```
 
-For more information, please refer to the [components documentation](https://www.designsystem.tech.gov.sg/components).
-
 ### Via NPM
 
 ```sh
-$ npm i @govtechsg/sgds bootstrap-icons
+$ npm i @sit-canvas/canvas-css bootstrap-icons
 ```
 
 ### For Webpack
 
 ```js
 //importing css
-import '@govtechsg/sgds/css/sgds.css';
+import '@sit-canvas/canvas-css/css/sit-canvas.css';
 
 import '@popperjs/core';
 import * as bootstrap from 'bootstrap';

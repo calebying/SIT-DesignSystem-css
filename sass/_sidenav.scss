@@ -1,4 +1,4 @@
-.sgds {
+.sit-canvas {
   &.sidenav {
     --#{$prefix}sidenav-width: #{$sidenav-width};
     --#{$prefix}sidenav-font-size: #{$sidenav-fontsize};
@@ -10,7 +10,7 @@
       + .sidenav-item {
         margin-top: $sidenav-item-spacing;
       }
-      .sgds.btn {
+      .sit-canvas.btn {
         color: $sidenav-color;
         font-size: inherit;
 

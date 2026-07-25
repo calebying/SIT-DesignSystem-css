@@ -5,7 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    sgds: './src/sgds.js',
+    'sit-canvas': './src/sit-canvas.js',
   },
   devtool: 'source-map',
   mode: 'development',
@@ -45,12 +45,6 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: './css/[name].css',
-    }),
-    new MiniCssExtractPlugin({
-      filename: '../../portal/css/[name].css',
-    }),
-    new CopyPlugin({
-      patterns: [{ from: 'sass', to: '../../portal/sass' }],
     }),
   ],
 };

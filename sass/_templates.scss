@@ -1,4 +1,4 @@
-sgds-template-grid {
+sit-canvas-template-grid {
     background: #fafafa;
     &.with-sidenav {
         display: grid;
@@ -9,7 +9,7 @@ sgds-template-grid {
         }
         @include media-breakpoint-down(lg) {
             display: block;
-            sgds-aside-area,
+            sit-canvas-aside-area,
             aside {
                 display: none;
             }
@@ -18,7 +18,7 @@ sgds-template-grid {
 
 }
 
-sgds-aside-area {
+sit-canvas-aside-area {
     box-shadow: 3px 0px 6px 0px #d0d5dd80;
     background: #ffffff;
     padding-top: 1.5rem;
@@ -26,13 +26,13 @@ sgds-aside-area {
     z-index: 10;
 }
 
-sgds-toc-area {
+sit-canvas-toc-area {
     padding-top: 1.5rem;
     font-size: 14px;
     position: sticky;
 }
 
-sgds-content-area {
+sit-canvas-content-area {
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -40,11 +40,11 @@ sgds-content-area {
     max-width: 100%;
 }
 
-// sgds-breadcrumb-area {
+// sit-canvas-breadcrumb-area {
 //     grid-area: breadcrumb;
 // }
 
-sgds-content-header-top {
+sit-canvas-content-header-top {
     // grid-area: header-top;
     display: flex;
     flex-direction: row;
@@ -52,7 +52,7 @@ sgds-content-header-top {
     align-items: center;
 }
 
-sgds-content-header-bottom {
+sit-canvas-content-header-bottom {
     // grid-area: header-bottom;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -66,7 +66,7 @@ sgds-content-header-bottom {
     }
 }
 
-sgds-content-body {
+sit-canvas-content-body {
     // grid-area: content-body;
     display: flex;
     flex-direction: column;
