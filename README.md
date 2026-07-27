@@ -3,9 +3,8 @@
 [![npm](https://img.shields.io/npm/v/@sit-canvas/canvas-css.svg)](https://www.npmjs.com/package/@sit-canvas/canvas-css)
 
 The SIT Canvas Design System CSS framework provides the Bootstrap-based visual foundation used by
-Canvas React components. Forked and rebranded from GovTech's Singapore Government Design System
-(`@govtechsg/sgds` v2.3.6), independent of GovTech's registry — no dependency on their upstream
-package, so it will not auto-update from their releases.
+Canvas React components. It is an independent package with no external registry dependency, so it
+will not auto-update outside of releases published here.
 
 ***
 

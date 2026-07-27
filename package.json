@@ -1,7 +1,7 @@
 {
   "name": "@sit-canvas/canvas-css",
   "version": "1.0.0",
-  "description": "SIT Canvas Design System — Bootstrap-based CSS framework, forked from GovTechSG/sgds v2.3.6",
+  "description": "SIT Canvas Design System — Bootstrap-based CSS framework.",
   "repository": {
     "type": "git",
     "url": "https://github.com/calebying/SIT-DesignSystem-css.git"
