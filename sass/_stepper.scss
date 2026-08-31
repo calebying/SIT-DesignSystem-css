@@ -107,11 +107,11 @@
         }
 
         @include steps-size($font-size-base);
-        &.is-small{
+        &.stepper-sm{
             @include steps-size($font-size-sm);
         }
-        
-        &.is-large{
+
+        &.stepper-lg{
             @include steps-size($font-size-lg);
         }
     }
