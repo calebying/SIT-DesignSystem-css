@@ -7,6 +7,18 @@
   <link rel="stylesheet" href="../css/sit-canvas.css" />
   <style>
     /* Demo-page-only styling, not part of the framework */
+    :root { --demo-muted: #667085; }
+    /* This Grid-section caption was plain inline color:#667085 (readable on
+       a white background) until the dark-mode toggle exposed that it's
+       nearly invisible on the new --sit-canvas-body-bg dark background --
+       a real contrast bug this toggle was meant to surface, so it's fixed
+       here rather than shipping a toggle that visibly breaks its own demo
+       page. (The Typography section's similar caption uses Bootstrap's own
+       .text-body utility instead of inline colour -- that one turned out to
+       need a real framework-level fix, not a demo-only one: see
+       --sit-canvas-body-color-rgb in sass/_dark-theme.scss.) */
+    [data-bs-theme="dark"] { --demo-muted: #98a2b3; }
+    .demo-muted { color: var(--demo-muted); }
     body { padding-bottom: 4rem; }
     section { padding-top: 3rem; padding-bottom: 1rem; border-top: 1px solid #e4e7ec; }
     section:first-of-type { border-top: none; }
@@ -16,11 +28,12 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      background: #fff;
+      background: var(--sit-canvas-body-bg, #fff);
       border-bottom: 1px solid #e4e7ec;
       padding: 0.75rem 0;
     }
     .demo-nav a { margin-right: 1rem; font-size: 0.875rem; }
+    #demoThemeToggle { font-size: 0.875rem; cursor: pointer; }
     .demo-grid-row [class^="col"] {
       background-color: rgba(15, 113, 187, 0.08);
       border: 1px solid rgba(15, 113, 187, 0.25);
@@ -42,6 +55,7 @@
       <a href="#forms">Forms</a>
       <a href="#alerts">Alerts</a>
       <a href="#grid">Grid</a>
+      <button type="button" id="demoThemeToggle" class="btn btn-sm btn-outline-secondary">🌙 Dark mode</button>
     </span>
   </nav>
 
@@ -50,7 +64,7 @@
     <!-- ============ TYPOGRAPHY ============ -->
     <section id="typography">
       <h2>Typography</h2>
-      <p class="text-body" style="color:#667085;">
+      <p class="text-body">
         Loaded directly from the built <code>css/sit-canvas.css</code> — no build step, no JS
         dependency. Headings, the display scale, body copy, and inline text elements below.
       </p>
@@ -205,7 +219,7 @@
     <section id="grid">
       <h2>Grid</h2>
 
-      <p style="color:#667085;">12-column grid, demonstrated at a couple of common splits.</p>
+      <p class="demo-muted">12-column grid, demonstrated at a couple of common splits.</p>
 
       <div class="row demo-grid-row">
         <div class="col-12">col-12</div>
@@ -228,5 +242,29 @@
     </section>
 
   </main>
+
+  <script>
+    // Demo-page-only wiring — not part of the framework. Flips the new
+    // [data-bs-theme="dark"] attribute (see sass/_dark-theme.scss) so this
+    // page is a visual check for the dark colour mode, and remembers the
+    // choice across reloads of this demo page.
+    (function () {
+      var root = document.documentElement;
+      var toggle = document.getElementById('demoThemeToggle');
+
+      function apply(theme) {
+        root.setAttribute('data-bs-theme', theme);
+        toggle.textContent = theme === 'dark' ? '☀️ Light mode' : '🌙 Dark mode';
+      }
+
+      apply(localStorage.getItem('sit-canvas-demo-theme') || 'light');
+
+      toggle.addEventListener('click', function () {
+        var next = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('sit-canvas-demo-theme', next);
+        apply(next);
+      });
+    })();
+  </script>
 </body>
 </html>

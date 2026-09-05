@@ -1,0 +1,92 @@
+// Dark colour mode.
+//
+// Bootstrap 5.3 ships a documented `data-bs-theme="dark"` colour-mode
+// mechanism (mixins/_color-mode.scss, $enable-dark-mode, $color-mode-type)
+// built on this same "color-scheme" idea. This project is pinned to
+// Bootstrap 5.2.3 (see package.json), which predates that mechanism
+// entirely -- verified directly against node_modules/bootstrap/scss: no
+// $enable-dark-mode variable, no mixins/_color-mode.scss, no
+// [data-bs-theme] selector anywhere in the vendored source. So this partial
+// hand-rolls the same attribute-selector pattern 5.3 ships natively,
+// re-using the one piece of 5.2.3 infrastructure that already points this
+// direction: mixins/_color-scheme.scss's `color-scheme($name)` mixin
+// (a thin `@media (prefers-color-scheme: $name) { @content }` wrapper),
+// which sass/_mixins.scss already imports but nothing had ever called.
+//
+// This mirrors the *intent* of @sit-canvas/canvas-web-component's
+// day.css/night.css (an explicit class-based semantic-token swap), adapted
+// to this framework's flatter, Bootstrap-native token set --
+// `--sit-canvas-*` root custom properties rather than that package's
+// dedicated semantic layer (--sit-bg-default, --sit-color-subtle, etc).
+//
+// SCOPE (real, not a full repaint): only tokens actually consumed via
+// var(--#{$prefix}...) at runtime by Bootstrap's reboot/type partials pick
+// up this override automatically -- body background/text, links, <code>,
+// <mark>. Verified against node_modules/bootstrap/scss/_reboot.scss: those
+// five are the actual runtime var() consumers there. Most *component*
+// chrome (`.card`, `.dropdown-menu`, `.modal-content`, `.popover`, ...)
+// bakes its own background/border as a literal hex value at BUILD time
+// from Sass variables (confirmed in docs/tokens.md's "Base defaults"
+// column -- e.g. card's `bg:#fff` is compiled in, not `var(--sit-canvas-*)`
+// at runtime), so those don't flip yet. That's a real, separate, much
+// larger follow-up (migrating every component partial to reference a
+// shared root token instead of a literal colour) -- tracked here rather
+// than silently pretended-away, the same way this file already tracks
+// P0-01/P4-04/P4-05 as known, not-fixed-here gaps.
+//
+// Explicit choice (the `data-bs-theme` attribute) always wins over the
+// system preference fallback below -- same precedence Bootstrap 5.3 itself
+// uses for real color modes.
+
+@mixin sit-canvas-dark-tokens {
+  color-scheme: dark;
+
+  --#{$prefix}body-bg: #14161a;
+  --#{$prefix}body-color: #{$gray-200};
+  // The opacity-utility classes (.text-body, .bg-body, .text-opacity-*,
+  // .bg-opacity-*) don't read --body-color/--body-bg directly -- they read
+  // these separate -rgb companions via
+  // rgba(var(--#{$prefix}body-color-rgb), var(--#{$prefix}text-opacity)),
+  // and .text-body/.bg-body set that color with !important (see
+  // node_modules/bootstrap/scss/_helpers/_colored-links.scss and
+  // _root.scss). Missing this pair was a real bug caught live: the kitchen-
+  // sink demo's .text-body caption stayed dark-on-dark and was nearly
+  // invisible with only --body-color/--body-bg overridden above.
+  --#{$prefix}body-color-rgb: #{to-rgb($gray-200)};
+  --#{$prefix}body-bg-rgb: #{to-rgb(#14161a)};
+
+  // Default link colour ($cyan, #0F71BB) is a mid-value blue tuned for a
+  // white background -- checked by eye against the new #14161a body-bg and
+  // it reads muddy, so dark mode borrows the existing --sit-canvas-cyan-400
+  // / -300 tiers (already-defined, lighter steps of the same hue) instead
+  // of inventing a new colour.
+  --#{$prefix}link-color: #{$cyan-400};
+  --#{$prefix}link-hover-color: #{$cyan-300};
+
+  // $pink-* tint/shade tiers are commented out/undefined in this codebase
+  // (see sass/_variables.scss) -- computed by hand instead: tint-color(
+  // $pink, 40%) = mix(white, #d63384, 40%) = #e685b5.
+  --#{$prefix}code-color: #e685b5;
+  --#{$prefix}highlight-bg: #4a3b0f;
+
+  // Not consumed by reboot.scss today (see the scope note above), but a
+  // real semantic token this codebase already exposes at :root -- kept in
+  // sync so it's correct wherever/whenever a future component partial
+  // starts reading it, rather than silently drifting from the tokens
+  // that *do* flip.
+  --#{$prefix}border-color: #{$gray-500};
+}
+
+[data-bs-theme="dark"] {
+  @include sit-canvas-dark-tokens;
+}
+
+// System-preference fallback for pages that never set the attribute at
+// all. An explicit `data-bs-theme="light"` (or "dark") on <html> always
+// takes precedence over this, because :not([data-bs-theme]) stops matching
+// the moment either attribute value is present.
+:root:not([data-bs-theme]) {
+  @include color-scheme(dark) {
+    @include sit-canvas-dark-tokens;
+  }
+}
