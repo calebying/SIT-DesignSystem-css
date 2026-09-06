@@ -147,6 +147,54 @@ Set per-class, not at `:root` — `--sit-canvas-bg-opacity` (`.bg-opacity-10/25/
 
 ***
 
+## Dark colour mode (`data-bs-theme="dark"`)
+
+Set `data-bs-theme="dark"` on `<html>` (or leave it unset and rely on the visitor's OS-level
+`prefers-color-scheme: dark`) to flip a subset of the global tokens above. Source:
+`sass/_dark-theme.scss`.
+
+```html
+<html data-bs-theme="dark">
+```
+
+Bootstrap 5.3 ships this exact attribute mechanism natively; this project is pinned to Bootstrap
+**5.2.3** (see `package.json`), which predates it entirely — verified directly against
+`node_modules/bootstrap/scss`: no `$enable-dark-mode`, no `mixins/_color-mode.scss`, no
+`[data-bs-theme]` selector anywhere in the vendored source. `sass/_dark-theme.scss` hand-rolls the
+same pattern, reusing `sass/mixins/_color-scheme.scss`'s `color-scheme($name)` mixin (a thin
+`prefers-color-scheme` media-query wrapper this codebase already imported but never called) for
+the no-attribute system-preference fallback. An explicit `data-bs-theme` attribute always wins over
+that fallback.
+
+| Token | Light (default) | Dark |
+|---|---|---|
+| `--sit-canvas-body-bg` / `-rgb` | `#fff` | `#14161a` |
+| `--sit-canvas-body-color` / `-rgb` | `#1d2939` | `#e4e7ec` (`$gray-200`) |
+| `--sit-canvas-link-color` | `#0f71bb` | `#58a1d4` (`$cyan-400`) |
+| `--sit-canvas-link-hover-color` | `#0c5a96` | `#90c1e4` (`$cyan-300`) |
+| `--sit-canvas-code-color` | `#d63384` | `#e685b5` (hand-computed `tint-color($pink, 40%)` — `$pink-300` itself is commented out in this codebase) |
+| `--sit-canvas-highlight-bg` | `#fcf8e3` | `#4a3b0f` |
+| `--sit-canvas-border-color` | `#98a2b3` | `#667085` (`$gray-500`) — see the gap note below |
+
+**Real, checked scope — not a full repaint.** Only tokens actually consumed via
+`var(--sit-canvas-*)` at *runtime* pick this up automatically: `body`'s background/text, links,
+`<code>`, `<mark>` (confirmed against `node_modules/bootstrap/scss/_reboot.scss` — those five are
+its only runtime `var()` reads of this set). `--sit-canvas-border-color` is included above for
+consistency but isn't consumed anywhere at runtime today, so overriding it currently has no visible
+effect — kept in sync for whenever a future component starts reading it rather than left to drift.
+
+**Known gap, not fixed here:** most *component* chrome (`.card`, `.dropdown-menu`,
+`.modal-content`, `.popover`, …) bakes its own background/border as a literal hex value at
+**build time** from Sass variables — see each family's "Base defaults" column above (e.g. card's
+`bg:#fff` is compiled in, not `var(--sit-canvas-*)` at runtime) — so those don't flip yet. Making
+them flip is a real, separate, much larger follow-up: migrating every component partial to
+reference a shared root token instead of a literal colour, one family at a time.
+
+Demo: `docs/kitchen-sink.html`'s nav bar has a working 🌙/☀️ toggle button (persisted in
+`localStorage`, demo-page-only wiring) so this layer is visually checkable without a build step.
+
+***
+
 ## Foundation tokens (SCSS-only — not CSS custom properties)
 
 These control compile-time output only; there's no `var(--sit-canvas-*)` to override them at
