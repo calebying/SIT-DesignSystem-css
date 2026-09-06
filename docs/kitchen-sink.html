@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIT Canvas — Kitchen Sink</title>
+  <link rel="stylesheet" href="../css/sit-canvas.css" />
+  <style>
+    /* Demo-page-only styling, not part of the framework */
+    body { padding-bottom: 4rem; }
+    section { padding-top: 3rem; padding-bottom: 1rem; border-top: 1px solid #e4e7ec; }
+    section:first-of-type { border-top: none; }
+    .demo-swatch-row .btn,
+    .demo-swatch-row .badge { margin: 0 0.5rem 0.5rem 0; }
+    .demo-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fff;
+      border-bottom: 1px solid #e4e7ec;
+      padding: 0.75rem 0;
+    }
+    .demo-nav a { margin-right: 1rem; font-size: 0.875rem; }
+    .demo-grid-row [class^="col"] {
+      background-color: rgba(15, 113, 187, 0.08);
+      border: 1px solid rgba(15, 113, 187, 0.25);
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Not a framework component — just in-page navigation for this demo -->
+  <nav class="demo-nav container">
+    <strong>SIT Canvas — Kitchen Sink</strong>
+    <span style="float:right">
+      <a href="#typography">Typography</a>
+      <a href="#buttons">Buttons</a>
+      <a href="#forms">Forms</a>
+      <a href="#alerts">Alerts</a>
+      <a href="#grid">Grid</a>
+    </span>
+  </nav>
+
+  <main class="container">
+
+    <!-- ============ TYPOGRAPHY ============ -->
+    <section id="typography">
+      <h2>Typography</h2>
+      <p class="text-body" style="color:#667085;">
+        Loaded directly from the built <code>css/sit-canvas.css</code> — no build step, no JS
+        dependency. Headings, the display scale, body copy, and inline text elements below.
+      </p>
+
+      <h1>h1. SIT Canvas heading</h1>
+      <h2>h2. SIT Canvas heading</h2>
+      <h3>h3. SIT Canvas heading</h3>
+      <h4>h4. SIT Canvas heading</h4>
+      <h5>h5. SIT Canvas heading</h5>
+      <h6>h6. SIT Canvas heading</h6>
+
+      <hr />
+
+      <div class="display-1">Display 1</div>
+      <div class="display-3">Display 3</div>
+      <div class="display-5">Display 5</div>
+
+      <hr />
+
+      <p class="lead">
+        This is a lead paragraph — it stands out from regular body copy using the
+        <code>.lead</code> utility class.
+      </p>
+      <p>
+        This is a regular paragraph. It contains a <a href="#typography">standard link</a>, some
+        <strong>bold text</strong>, and some <em>emphasized text</em>.
+      </p>
+      <blockquote class="blockquote">
+        <p>A well-known quote, contained in a blockquote element.</p>
+      </blockquote>
+      <p>Inline code looks like this: <code>--sit-canvas-primary</code></p>
+    </section>
+
+    <!-- ============ BUTTONS ============ -->
+    <section id="buttons">
+      <h2>Buttons</h2>
+
+      <h5>Solid</h5>
+      <div class="demo-swatch-row">
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-dark">Dark</button>
+      </div>
+
+      <h5>Outline</h5>
+      <div class="demo-swatch-row">
+        <button type="button" class="btn btn-outline-primary">Primary</button>
+        <button type="button" class="btn btn-outline-secondary">Secondary</button>
+        <button type="button" class="btn btn-outline-success">Success</button>
+        <button type="button" class="btn btn-outline-danger">Danger</button>
+        <button type="button" class="btn btn-outline-warning">Warning</button>
+        <button type="button" class="btn btn-outline-info">Info</button>
+        <button type="button" class="btn btn-outline-light">Light</button>
+        <button type="button" class="btn btn-outline-dark">Dark</button>
+      </div>
+
+      <h5>Sizes &amp; states</h5>
+      <div class="demo-swatch-row">
+        <button type="button" class="btn btn-primary btn-sm">Small</button>
+        <button type="button" class="btn btn-primary">Default</button>
+        <button type="button" class="btn btn-primary btn-lg">Large</button>
+        <button type="button" class="btn btn-primary" disabled>Disabled</button>
+      </div>
+    </section>
+
+    <!-- ============ FORMS ============ -->
+    <section id="forms">
+      <h2>Forms</h2>
+
+      <form onsubmit="return false;">
+        <div class="mb-3">
+          <label for="demoTextInput" class="form-label">Text input</label>
+          <input type="text" class="form-control" id="demoTextInput" placeholder="e.g. Jane Tan" />
+        </div>
+
+        <div class="mb-3">
+          <label for="demoSelect" class="form-label">Select</label>
+          <select class="form-select" id="demoSelect">
+            <option selected>Choose one…</option>
+            <option value="1">Option one</option>
+            <option value="2">Option two</option>
+            <option value="3">Option three</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="demoTextarea" class="form-label">Textarea</label>
+          <textarea class="form-control" id="demoTextarea" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="demoInputGroup" class="form-label">Input group</label>
+          <div class="input-group">
+            <span class="input-group-text" id="demoInputGroupAddon">@</span>
+            <input
+              type="text"
+              class="form-control"
+              id="demoInputGroup"
+              placeholder="username"
+              aria-describedby="demoInputGroupAddon"
+            />
+          </div>
+        </div>
+
+        <fieldset class="mb-3">
+          <legend class="col-form-label">Checks &amp; radios</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="demoCheck1" />
+            <label class="form-check-label" for="demoCheck1">Checkbox option</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="demoRadio" id="demoRadio1" checked />
+            <label class="form-check-label" for="demoRadio1">Radio option one</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="demoRadio" id="demoRadio2" />
+            <label class="form-check-label" for="demoRadio2">Radio option two</label>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </section>
+
+    <!-- ============ ALERTS ============ -->
+    <section id="alerts">
+      <h2>Alerts</h2>
+
+      <div class="alert alert-primary">A primary alert — check this one out!</div>
+      <div class="alert alert-secondary">A secondary alert — check this one out!</div>
+      <div class="alert alert-success">A success alert — check this one out!</div>
+      <div class="alert alert-danger">A danger alert — check this one out!</div>
+      <div class="alert alert-warning">A warning alert — check this one out!</div>
+      <div class="alert alert-info">An info alert — check this one out!</div>
+      <div class="alert alert-light">A light alert — check this one out!</div>
+      <div class="alert alert-dark">A dark alert — check this one out!</div>
+
+      <div class="alert alert-primary alert-dismissible" role="alert">
+        A dismissible alert — note the extra right padding reserved for a close button
+        (<code>.alert-dismissible</code>). This page doesn't load Bootstrap's JS, so the button
+        itself isn't wired up here — it's included purely to show the layout.
+        <button type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+    </section>
+
+    <!-- ============ GRID ============ -->
+    <section id="grid">
+      <h2>Grid</h2>
+
+      <p style="color:#667085;">12-column grid, demonstrated at a couple of common splits.</p>
+
+      <div class="row demo-grid-row">
+        <div class="col-12">col-12</div>
+      </div>
+      <div class="row demo-grid-row">
+        <div class="col-6">col-6</div>
+        <div class="col-6">col-6</div>
+      </div>
+      <div class="row demo-grid-row">
+        <div class="col-4">col-4</div>
+        <div class="col-4">col-4</div>
+        <div class="col-4">col-4</div>
+      </div>
+      <div class="row demo-grid-row">
+        <div class="col-md-3">col-md-3</div>
+        <div class="col-md-3">col-md-3</div>
+        <div class="col-md-3">col-md-3</div>
+        <div class="col-md-3">col-md-3</div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
