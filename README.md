@@ -62,6 +62,14 @@ import * as bootstrap from 'bootstrap';
 
 ***
 
+## Design Tokens
+
+See [docs/tokens.md](./docs/tokens.md) for the full list of `--sit-canvas-*` custom properties and
+SCSS foundation variables (color, spacing, typography, elevation, z-index, and per-component
+tokens), with default values read from the compiled CSS.
+
+***
+
 ## Patch Notes
 
 See [Changelog](./CHANGELOG.md)
