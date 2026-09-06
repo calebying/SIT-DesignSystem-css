@@ -1,18 +1,18 @@
 .section{
-    padding: var(--section-padding);
+    padding: var(--#{$variable-prefix}section-padding);
     &-xs{
-        padding: var(--section-padding-xs);
+        padding: var(--#{$variable-prefix}section-padding-xs);
     }
     &-sm{
-        padding: var(--section-padding-sm);
+        padding: var(--#{$variable-prefix}section-padding-sm);
     }
     &-md{
-        padding: var(--section-padding);
+        padding: var(--#{$variable-prefix}section-padding);
     }
     &-lg{
-        padding: var(--section-padding-lg);
+        padding: var(--#{$variable-prefix}section-padding-lg);
     }
     &-xl{
-        padding: var(--section-padding-xl);
+        padding: var(--#{$variable-prefix}section-padding-xl);
     }
 }

@@ -117,4 +117,8 @@ $utilities: map-merge(
 
 @import "templates";
 
+// Accessibility overrides — imported last so it wins the cascade against
+// the component partials above without needing extra specificity.
+@import "forced-colors";
+
 // scss-docs-end import-stack

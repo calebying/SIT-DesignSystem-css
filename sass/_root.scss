@@ -3,13 +3,21 @@
     --#{$variable-prefix}gutter-x: 1.5rem;
 
     // custom variables for section helper class _section.scss
+    // Mobile-first base (<lg / <992px): smaller values pulled from the $spacers
+    // scale in _variables.scss, so section padding is never zero below the lg
+    // breakpoint. The lg block below overrides these upward for larger screens.
+    --#{$variable-prefix}section-padding: #{map-get($spacers, 4)} 1.5rem;
+    --#{$variable-prefix}section-padding-xs: #{map-get($spacers, 2)} 1.5rem;
+    --#{$variable-prefix}section-padding-sm: #{map-get($spacers, 3)} 1.5rem;
+    --#{$variable-prefix}section-padding-lg: #{map-get($spacers, 6)} 1.5rem;
+    --#{$variable-prefix}section-padding-xl: #{map-get($spacers, 8)} 1.5rem;
 
     @include media-breakpoint-up(lg) {
-        --section-padding: 3rem 1.5rem;
-        --section-padding-xs: 1rem 1.5rem;
-        --section-padding-sm: 1.5rem 1.5rem;
-        --section-padding-lg: 9rem 1.5rem;
-        --section-padding-xl: 18rem 1.5rem;
+        --#{$variable-prefix}section-padding: 3rem 1.5rem;
+        --#{$variable-prefix}section-padding-xs: 1rem 1.5rem;
+        --#{$variable-prefix}section-padding-sm: 1.5rem 1.5rem;
+        --#{$variable-prefix}section-padding-lg: 9rem 1.5rem;
+        --#{$variable-prefix}section-padding-xl: 18rem 1.5rem;
     }
 
     // Backs the .transition utility below (sit-canvas.scss's $utilities
