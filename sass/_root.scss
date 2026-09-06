@@ -19,4 +19,19 @@
         --#{$variable-prefix}section-padding-lg: 9rem 1.5rem;
         --#{$variable-prefix}section-padding-xl: 18rem 1.5rem;
     }
+
+    // Backs the .transition utility below (sit-canvas.scss's $utilities
+    // merge) -- overridable per-instance the same way every other
+    // --#{$variable-prefix}* token in this file is, e.g.
+    // .my-widget { --sit-canvas-transition-base: all .1s linear; }
+    --#{$variable-prefix}transition-base: all .2s ease-in-out;
+}
+
+// Backs the .animate-fade-in utility (sit-canvas.scss's $utilities merge).
+// A real @keyframes rule, not something the utilities API itself can
+// generate -- it only maps property/value pairs to classes, so the
+// animation shorthand's target keyframes have to exist independently.
+@keyframes sit-canvas-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

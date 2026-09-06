@@ -38,6 +38,39 @@ $utilities: map-merge(
   ),
 );
 
+// Generic animation/transition utility family -- merged into Bootstrap's
+// utilities API the same way the palette above is, rather than hand-rolled
+// as raw CSS, so it gets the same responsive/RTL/!important handling every
+// other utility here does for free.
+$utilities: map-merge(
+  $utilities,
+  (
+    "transition": (
+      property: transition,
+      class: transition,
+      values: (
+        null: var(--#{$prefix}transition-base),
+      ),
+    ),
+    "transition-duration": (
+      property: transition-duration,
+      class: duration,
+      values: (
+        100: 100ms,
+        200: 200ms,
+        300: 300ms,
+      ),
+    ),
+    "animation": (
+      property: animation,
+      class: animate,
+      values: (
+        fade-in: sit-canvas-fade-in .3s ease-in-out both,
+      ),
+    ),
+  ),
+);
+
 
 // Layout & components
 @import "root";
