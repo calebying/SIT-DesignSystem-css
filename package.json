@@ -13,7 +13,8 @@
     "css"
   ],
   "scripts": {
-    "build": "rm -rf ./css && webpack --mode=production",
+    "build": "rm -rf ./css && webpack --mode=production && npm run build:rtl",
+    "build:rtl": "rtlcss css/sit-canvas.css css/sit-canvas.rtl.css",
     "dev": "webpack --watch",
     "changelog": "cz changelog --incremental"
   },
@@ -23,6 +24,7 @@
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "mini-css-extract-plugin": "^2.6.0",
+    "rtlcss": "^4.3.0",
     "sass": "~1.49.9",
     "sass-loader": "^14.2.1",
     "webpack": "^5.70.0",

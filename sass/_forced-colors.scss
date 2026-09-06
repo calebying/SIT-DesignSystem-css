@@ -1,0 +1,86 @@
+// Forced Colors Mode (Windows High Contrast Mode) support
+//
+// Chromium/Edge/Firefox forced-colors mode replaces most author colors with
+// a small, fixed set of system color keywords. Bootstrap 5.2.3 (the version
+// this framework is forked from) ships no forced-colors handling at all, and
+// two patterns SIT Canvas relies on make that gap a real problem here:
+//
+//   1. Buttons default --#{$prefix}btn-border-color to `transparent`
+//      (see mixins/_buttons.scss) and rely purely on background-color for
+//      their visible shape. The UA remaps background-color under
+//      forced-colors, but leaves a literal `transparent` border-color
+//      alone — so a button can end up with no visible edge at all.
+//   2. Buttons, form controls, and links all indicate focus via box-shadow
+//      (see _buttons.scss `&:focus-visible { box-shadow: ... }` and the
+//      Bootstrap form partials) — box-shadow is not rendered under
+//      forced-colors, so focus becomes invisible.
+//
+// This block restores both using system color keywords (ButtonText,
+// Highlight, GrayText, Canvas, CanvasText), which forced-colors mode is
+// guaranteed to render distinctly from the page background. Imported last
+// (see sit-canvas.scss) so it wins the cascade against the component
+// partials above it without needing extra specificity or !important.
+@media (forced-colors: active) {
+  // Make sure nothing upstream has opted these elements out of the OS's
+  // forced palette.
+  a,
+  .btn,
+  .form-control,
+  .form-select,
+  .form-check-input,
+  .form-range {
+    forced-color-adjust: auto;
+  }
+
+  // Buttons: force-restore a visible boundary regardless of the authored
+  // (often transparent) border-color token.
+  .btn {
+    border-color: ButtonText;
+  }
+
+  .btn:disabled,
+  .btn.disabled {
+    border-color: GrayText;
+    color: GrayText;
+  }
+
+  // Form controls: keep the native control's border visible regardless of
+  // authored border-color/box-shadow.
+  .form-control,
+  .form-select,
+  .form-check-input,
+  .form-range {
+    border-color: ButtonText;
+  }
+
+  // Checkboxes/radios: --checked-bg-image is an SVG data-uri painted via
+  // background-image, which the UA is not guaranteed to render under
+  // forced-colors. Guarantee the checked/indeterminate state stays legible
+  // with a solid system-color fill even if the checkmark icon itself
+  // disappears.
+  .form-check-input:checked,
+  .form-check-input:indeterminate {
+    background-color: Highlight;
+    border-color: Highlight;
+  }
+
+  // Focus indication: restore a visible outline everywhere box-shadow is
+  // currently the only focus affordance.
+  .btn:focus-visible,
+  .form-control:focus,
+  .form-select:focus,
+  .form-check-input:focus,
+  .form-range:focus,
+  a:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  // Links: the UA auto-applies LinkText/VisitedText, but color alone isn't
+  // a reliable affordance — guarantee the underline SIT already defaults to
+  // ($link-decoration: underline) can't be turned off by a component that
+  // sets text-decoration: none on a link-like element.
+  a {
+    text-decoration: underline;
+  }
+}

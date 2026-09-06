@@ -14,7 +14,18 @@ $gray-400: #98A2B3 !default;
 $gray-500: #667085 !default;
 $gray-600: #344054 !default;
 $gray-700: #1D2939 !default;
-$gray-800: #000 !default;
+// $gray-800 was literally #000 -- identical to $gray-900 and $black below,
+// three redundant "pure black" tokens with no distinct dark-mode-ready ramp
+// (documented as a known gap, P4-05, in docs/tokens.md before this fix).
+// Consumers checked first (footer-bottom-border-color, form-select's
+// dropdown-chevron indicator colour, dropdown-dark-bg): all three read more
+// naturally as a dark GRAY than solid black, and real Bootstrap's own stock
+// $gray-800 is #212529 (never literal black either) -- restored to that
+// value. $gray-900 and $black are intentionally left at #000: the task
+// this fixes only reported a 3-way collision, and $gray-900/$black staying
+// identical to each other (the true-black end of the scale) is not itself
+// a bug the way $gray-800 colliding with them was.
+$gray-800: #212529 !default;
 $gray-900: #000 !default;
 $black: #000 !default;
 // scss-docs-end gray-color-variables
@@ -280,15 +291,25 @@ $lights: ("light-100": $gray-100,
   "light-800": $gray-800,
   "light-900": $gray-900) !default;
 
-$darks: ("dark-100": $gray-100,
-  "dark-200": $gray-200,
-  "dark-300": $gray-300,
-  "dark-400": $gray-400,
-  "dark-500": $gray-500,
-  "dark-600": $gray-600,
-  "dark-700": $gray-700,
-  "dark-800": $gray-800,
-  "dark-900": $gray-900) !default;
+// "dark" gets its own literal near-black scale (Bootstrap's classic
+// .alert-dark palette, not this file's own warm $gray-* tints, which are
+// $lights' scale above). Previously this map was a byte-for-byte copy of
+// $lights, so .alert-100/.alert-400 lookups in _alert.scss resolved to
+// IDENTICAL colours for "light" and "dark", and .alert-light/.alert-dark
+// rendered pixel-identical despite the P0-02 duplicate-rule fix.
+// Contrast re-checked by hand against _alert.scss's shared $alert-color
+// ($gray-600, #344054) for both ends of this fix:
+//   dark-100 (#D6D8D9) vs #344054  -> 7.31:1  (>= $min-contrast-ratio: 4.5)
+//   light-100 (#F7F7F9, unchanged) vs #344054 -> 9.77:1 (>= 4.5, re-verified)
+$darks: ("dark-100": #D6D8D9,
+  "dark-200": #C6C8CA,
+  "dark-300": #B0B3B6,
+  "dark-400": #9A9DA1,
+  "dark-500": #7C8085,
+  "dark-600": #52565B,
+  "dark-700": #383B3F,
+  "dark-800": #212529,
+  "dark-900": #000) !default;
 
   $theme-colors-set: ("primary": $primarys,
   "secondary": $secondarys,

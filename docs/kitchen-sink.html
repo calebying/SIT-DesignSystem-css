@@ -19,43 +19,11 @@
        --sit-canvas-body-color-rgb in sass/_dark-theme.scss.) */
     [data-bs-theme="dark"] { --demo-muted: #98a2b3; }
     .demo-muted { color: var(--demo-muted); }
-    body { padding-bottom: 4rem; }
-    section { padding-top: 3rem; padding-bottom: 1rem; border-top: 1px solid #e4e7ec; }
-    section:first-of-type { border-top: none; }
-    .demo-swatch-row .btn,
-    .demo-swatch-row .badge { margin: 0 0.5rem 0.5rem 0; }
-    .demo-nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: var(--sit-canvas-body-bg, #fff);
       border-bottom: 1px solid #e4e7ec;
       padding: 0.75rem 0;
     }
     .demo-nav a { margin-right: 1rem; font-size: 0.875rem; }
     #demoThemeToggle { font-size: 0.875rem; cursor: pointer; }
-    .demo-grid-row [class^="col"] {
-      background-color: rgba(15, 113, 187, 0.08);
-      border: 1px solid rgba(15, 113, 187, 0.25);
-      padding: 0.5rem;
-      margin-bottom: 0.5rem;
-      font-size: 0.875rem;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Not a framework component — just in-page navigation for this demo -->
-  <nav class="demo-nav container">
-    <strong>SIT Canvas — Kitchen Sink</strong>
-    <span style="float:right">
-      <a href="#typography">Typography</a>
-      <a href="#buttons">Buttons</a>
-      <a href="#forms">Forms</a>
-      <a href="#alerts">Alerts</a>
-      <a href="#grid">Grid</a>
-      <button type="button" id="demoThemeToggle" class="btn btn-sm btn-outline-secondary">🌙 Dark mode</button>
     </span>
   </nav>
 
